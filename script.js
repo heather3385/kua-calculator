@@ -1,40 +1,57 @@
 
-const answers = {};
+const state = {
+  insurance: null,
+  work: null,
+  unemployed: null,
+  income: null,
+};
 
-function setAnswer(field, value, btn) {
-  answers[field] = value;
-  const group = btn.parentNode;
-  const buttons = group.querySelectorAll("button");
-  buttons.forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
-  evaluate();
-}
+document.querySelectorAll(".option-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const question = button.getAttribute("data-question");
+    const value = button.getAttribute("data-value");
+    state[question] = value;
 
-function evaluate() {
+    // 버튼 시각적 표시 업데이트
+    const groupButtons = document.querySelectorAll(
+      `.option-button[data-question="${question}"]`
+    );
+    groupButtons.forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
+  });
+});
+
+document.getElementById("calculatorForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
   const age = parseInt(document.getElementById("age").value);
-  if (!age || age < 15 || age > 34) {
-    document.getElementById("resultBox").innerText = "⚠️ 대상 연령은 만 15세 이상 34세 이하 청년입니다.";
+  const { insurance, work, unemployed, income } = state;
+
+  const resultBox = document.getElementById("result");
+
+  if (
+    isNaN(age) ||
+    !insurance ||
+    !work ||
+    !unemployed ||
+    !income
+  ) {
+    resultBox.innerHTML = "<p>모든 질문에 응답해주세요.</p>";
+    resultBox.style.display = "block";
     return;
   }
 
-  const { employment, company, insurance, duration } = answers;
-
-  if (!employment || !company || !insurance || !duration) {
-    document.getElementById("resultBox").innerText = "❗ 모든 항목에 응답해주세요.";
-    return;
-  }
-
-  if (employment === "regular" &&
-      company === "sme" &&
-      insurance === "yes" &&
-      duration === "over6") {
-    document.getElementById("resultBox").innerText =
-      "✅ 해당 청년은 제도 요건을 충족할 가능성이 높습니다. 기업이 신청하면 최대 1,200만원의 인건비 지원을 받을 수 있습니다.";
-  } else if (company === "large") {
-    document.getElementById("resultBox").innerText =
-      "❌ 대기업은 청년일자리도약장려금의 지원 대상이 아닙니다.";
+  if (
+    age >= 15 &&
+    age <= 69 &&
+    unemployed === "yes" &&
+    income === "yes" &&
+    insurance === "no"
+  ) {
+    resultBox.innerHTML = "<p><strong class='green'>✅ 지원 가능성이 높습니다!</strong><br>1유형 또는 2유형 대상에 해당할 수 있습니다. 실제 자격은 소득·재산 조사 후 확정됩니다.</p>";
   } else {
-    document.getElementById("resultBox").innerText =
-      "⚠️ 조건 일부가 부족하여 지원 대상이 아닐 수 있습니다. 기업 및 고용노동부에 문의하세요.";
+    resultBox.innerHTML = "<p><strong class='red'>⚠️ 지원 대상이 아닐 수 있습니다.</strong><br>조건 중 일부가 맞지 않거나 추가 심사 요건이 있을 수 있습니다.</p>";
   }
-}
+
+  resultBox.style.display = "block";
+});

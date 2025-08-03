@@ -3,46 +3,50 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>청년고용지원금 조건 확인 계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>국민취업지원제도 간편 계산기</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>청년고용지원금 조건 확인 계산기</h1>
-    <p>아래 질문에 답하면 제도 참여 가능 여부를 확인할 수 있습니다.</p>
+    <h1>국민취업지원제도 간편 계산기</h1>
+    <p class="subtext">5가지 조건을 선택하면 예측 결과를 보여드립니다. <strong>정확한 자격 여부는 고용24에서 반드시 확인하세요.</strong></p>
 
-    <label for="age">1. 나이를 입력해주세요:</label>
-    <input type="number" id="age" placeholder="예: 27" />
+    <form id="calculatorForm">
+      <div class="question">
+        <label>1. 나이 (만 나이 기준)</label><br />
+        <input type="number" id="age" placeholder="예: 25" required />
+      </div>
 
-    <p>2. 현재 근무 중인 고용형태는?</p>
-    <div class="btn-group" data-field="employment">
-      <button onclick="setAnswer('employment', 'regular', this)">정규직</button>
-      <button onclick="setAnswer('employment', 'nonregular', this)">비정규직/아님</button>
-    </div>
+      <div class="question">
+        <label>2. 현재 고용보험 가입 상태</label><br />
+        <button type="button" class="option-button" data-value="yes" data-question="insurance">가입중</button>
+        <button type="button" class="option-button" data-value="no" data-question="insurance">미가입</button>
+      </div>
 
-    <p>3. 해당 기업 유형은?</p>
-    <div class="btn-group" data-field="company">
-      <button onclick="setAnswer('company', 'sme', this)">중소/중견기업</button>
-      <button onclick="setAnswer('company', 'large', this)">대기업</button>
-    </div>
+      <div class="question">
+        <label>3. 최근 2년 내 100일 이상 근무 경험</label><br />
+        <button type="button" class="option-button" data-value="yes" data-question="work">예</button>
+        <button type="button" class="option-button" data-value="no" data-question="work">아니오</button>
+      </div>
 
-    <p>4. 고용보험 가입 상태는?</p>
-    <div class="btn-group" data-field="insurance">
-      <button onclick="setAnswer('insurance', 'yes', this)">가입</button>
-      <button onclick="setAnswer('insurance', 'no', this)">미가입</button>
-    </div>
+      <div class="question">
+        <label>4. 현재 미취업 상태인가요?</label><br />
+        <button type="button" class="option-button" data-value="yes" data-question="unemployed">예</button>
+        <button type="button" class="option-button" data-value="no" data-question="unemployed">아니오</button>
+      </div>
 
-    <p>5. 현재 근속 개월 수는?</p>
-    <div class="btn-group" data-field="duration">
-      <button onclick="setAnswer('duration', 'over6', this)">6개월 이상</button>
-      <button onclick="setAnswer('duration', 'under6', this)">6개월 미만</button>
-    </div>
+      <div class="question">
+        <label>5. 본인 또는 가구의 소득이 기준중위소득 60% 이하인가요?</label><br />
+        <button type="button" class="option-button" data-value="yes" data-question="income">예</button>
+        <button type="button" class="option-button" data-value="no" data-question="income">아니오</button>
+      </div>
 
-    <div class="result" id="resultBox">
-      결과가 여기에 표시됩니다.
-    </div>
-    <p class="notice">※ 본 계산기는 참고용이며, 실제 지원금 지급 여부는 기업의 신청 및 고용노동부 심사를 통해 확정됩니다.</p>
+      <button type="submit" class="submit-button">결과 확인</button>
+    </form>
+
+    <div id="result" class="result-box" style="display:none;"></div>
+    <p class="disclaimer">※ 이 계산기는 참고용이며 실제 자격 여부는 고용24를 통해 확인해야 합니다.</p>
   </div>
   <script src="script.js"></script>
 </body>

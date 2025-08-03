@@ -1,49 +1,75 @@
 
 body {
-  font-family: "Apple SD Gothic Neo", sans-serif;
-  background: #f5faff;
-  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
 }
 .container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 25px;
+  max-width: 640px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-button {
-  margin: 5px 5px 10px 0;
-  padding: 10px 20px;
-  font-size: 1em;
-  border: none;
-  border-radius: 6px;
-  background-color: #1976d2;
-  color: white;
-  cursor: pointer;
+h1 {
+  text-align: center;
+  color: #2c3e50;
 }
-button:hover {
-  background-color: #115293;
+.subtext {
+  text-align: center;
+  font-size: 0.95em;
+  margin-bottom: 25px;
+  color: #666;
 }
-button.selected {
-  background-color: #003f8c;
+.question {
+  margin-bottom: 20px;
 }
-input {
-  padding: 10px;
-  width: 100%;
-  margin: 10px 0 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #e3f2fd;
-  border-left: 5px solid #1976d2;
+.question label {
   font-weight: bold;
 }
-.notice {
-  margin-top: 15px;
-  font-size: 0.9em;
-  color: #444;
+.option-button {
+  margin: 6px 6px 0 0;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.option-button.selected {
+  background-color: #1abc9c;
+  color: white;
+  border-color: #16a085;
+}
+.submit-button {
+  width: 100%;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.result-box {
+  margin-top: 30px;
+  font-size: 1.1em;
+  padding: 16px;
+  background: #eef9ff;
+  border-left: 5px solid #3498db;
+  border-radius: 4px;
+}
+.green {
+  color: #27ae60;
+}
+.red {
+  color: #e74c3c;
+}
+.disclaimer {
+  margin-top: 40px;
+  font-size: 0.85em;
+  color: #888;
+  text-align: center;
 }
