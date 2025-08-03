@@ -4,37 +4,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>국민취업지원제도 계산기</title>
+  <title>청년고용지원금 조건 확인 계산기</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>국민취업지원제도 계산기</h1>
-    <p>아래 항목을 입력하고 선택하여 본인의 지원 가능 유형을 확인하세요.</p>
+    <h1>청년고용지원금 조건 확인 계산기</h1>
+    <p>아래 질문에 답하면 제도 참여 가능 여부를 확인할 수 있습니다.</p>
 
     <label for="age">1. 나이를 입력해주세요:</label>
-    <input type="number" id="age" placeholder="예: 28" />
+    <input type="number" id="age" placeholder="예: 27" />
 
-    <p>2. 최근 월 소득 수준은?</p>
-    <button onclick="setAnswer('income', 'low')">기준 중위소득 60% 이하</button>
-    <button onclick="setAnswer('income', 'high')">초과</button>
+    <p>2. 현재 근무 중인 고용형태는?</p>
+    <div class="btn-group" data-field="employment">
+      <button onclick="setAnswer('employment', 'regular', this)">정규직</button>
+      <button onclick="setAnswer('employment', 'nonregular', this)">비정규직/아님</button>
+    </div>
 
-    <p>3. 고용보험 가입 여부는?</p>
-    <button onclick="setAnswer('insurance', 'no')">미가입</button>
-    <button onclick="setAnswer('insurance', 'yes')">가입</button>
+    <p>3. 해당 기업 유형은?</p>
+    <div class="btn-group" data-field="company">
+      <button onclick="setAnswer('company', 'sme', this)">중소/중견기업</button>
+      <button onclick="setAnswer('company', 'large', this)">대기업</button>
+    </div>
 
-    <p>4. 가구 재산은?</p>
-    <button onclick="setAnswer('asset', 'under')">3억 원 이하</button>
-    <button onclick="setAnswer('asset', 'over')">초과</button>
+    <p>4. 고용보험 가입 상태는?</p>
+    <div class="btn-group" data-field="insurance">
+      <button onclick="setAnswer('insurance', 'yes', this)">가입</button>
+      <button onclick="setAnswer('insurance', 'no', this)">미가입</button>
+    </div>
 
-    <p>5. 현재 구직 의사가 있나요?</p>
-    <button onclick="setAnswer('intent', 'yes')">있음</button>
-    <button onclick="setAnswer('intent', 'no')">없음</button>
+    <p>5. 현재 근속 개월 수는?</p>
+    <div class="btn-group" data-field="duration">
+      <button onclick="setAnswer('duration', 'over6', this)">6개월 이상</button>
+      <button onclick="setAnswer('duration', 'under6', this)">6개월 미만</button>
+    </div>
 
     <div class="result" id="resultBox">
       결과가 여기에 표시됩니다.
     </div>
-    <p class="notice">※ 본 계산기는 참고용이며, 실제 자격 여부는 고용센터 심사 결과에 따라 달라질 수 있습니다.</p>
+    <p class="notice">※ 본 계산기는 참고용이며, 실제 지원금 지급 여부는 기업의 신청 및 고용노동부 심사를 통해 확정됩니다.</p>
   </div>
   <script src="script.js"></script>
 </body>
